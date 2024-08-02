@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 02:22:19 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/08/02 11:15:27 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/08/02 21:27:46 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,6 @@ int main(int ac, char **av, char **env)
 	t_link	*envp;
 	int flag;
 	flag = 0;
-	// rl_catch_signals = 0;
-	// if (isatty(STDIN_FILENO))
-	// {
-	// 	signal(SIGINT, handle_siginit);
-	// 	signal(SIGQUIT, SIG_IGN);
-	// }
 	if (*env == NULL)
 	{
 		envp = make_my_own_env();
@@ -119,7 +113,17 @@ int main(int ac, char **av, char **env)
 	{
 		t_cmds *commands = read_line();
 		if (!commands)
-			continue ;
+		{
+			write(1, "my_bash-4.5$ exit\n", 18);
+			ft_malloc_gab(0, 1);
+			exit(exit_status(0, 0));
+		}
+		rl_catch_signals = 0;
+		if (isatty(STDIN_FILENO))
+		{
+			signal(SIGINT, handle_siginit);
+			signal(SIGQUIT, SIG_IGN);
+		}
 		cho(commands, envp, flag);
 		// while(commands)
 		// {

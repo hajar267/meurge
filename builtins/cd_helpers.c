@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 23:26:36 by istili            #+#    #+#             */
-/*   Updated: 2024/07/31 12:17:45 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/08/02 20:58:04 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,21 @@ char	*find_home_path(t_link *envp)
 	}
 	return (0);
 }
+// char	*find_val(t_link *envp, char *key)
+// {
+// 	t_node	*head;
+// 	t_env	*env;
 
+// 	head = envp->head;
+// 	while (head)
+// 	{
+// 		env = head->data;
+// 		if (!ft_strcmp(env->key, key))
+// 			return (env->val);
+// 		head = head->next;
+// 	}
+// 	return (0);
+// }
 void	updatenv(t_link *link, char *key, char *val)
 {
 	t_node	*head;

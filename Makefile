@@ -6,7 +6,7 @@
 #    By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 16:05:43 by hfiqar            #+#    #+#              #
-#    Updated: 2024/08/02 11:12:30 by hfiqar           ###   ########.fr        #
+#    Updated: 2024/08/02 21:17:36 by hfiqar           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,9 +52,9 @@ SRC = parsing/tokenizer/characters.c \
 
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 # -fsanitize=address -g
-# LFLAGS = "-L$(shell brew --prefix readline)/lib"
-LFLAGS = "-L/goinfre/hfiqar/homebrew/opt/readline/lib"
-IFLAGS = "-I$(shell brew --prefix readline)/include"
+LFLAGS = -L$(shell brew --prefix readline)/lib
+# LFLAGS = "-Lgoinfre/hfiqar/homebrew/opt/readline/lib"
+IFLAGS = -I$(shell brew --prefix readline)/include
 
 OBJ = $(SRC:.c=.o)
 
@@ -66,7 +66,7 @@ $(NAME) : $(OBJ)
 	cc $(CFLAGS) $(OBJ) -o $@ -lreadline $(LFLAGS)
 
 %.o : %.c $(HEADER_FILE)
-	cc -c $< -o $@ $(CFLAGS)
+	cc -c $< -o $@ $(CFLAGS) $(IFLAGS)
 
 clean:
 	@$(RM) $(OBJ)

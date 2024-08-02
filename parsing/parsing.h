@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 10:54:25 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/08/02 11:43:26 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/08/02 12:09:04 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,13 @@ typedef struct s_cmds
 	int				fd_h;
 }t_cmds;
 
+typedef struct s_values
+{
+	int		x;
+	int		j;
+	int		i;
+	int		len;
+}t_values;
 
 //herdoc
 void	heredoc(t_cmds	*command);

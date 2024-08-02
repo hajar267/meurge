@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 02:22:19 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/07/31 13:17:01 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/08/02 11:15:27 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,17 @@ int convert_it(char *line, t_token **head_ref)
 	return (1);
 }
 
+int	check_for_empty(t_token	*tokens)
+{
+	while (tokens)
+	{
+		if (tokens->content[0] == '\0')
+			return (-1);
+		tokens = tokens->next;
+	}
+	return (1);
+}
+
 t_cmds	*read_line(void)
 {
 	char* line = readline("my_bash-4.5$ ");
@@ -57,6 +68,8 @@ t_cmds	*read_line(void)
 		return (NULL) ;
 	// we enum just into " " for $
 	free(line);
+	if (check_for_empty(tok) == -1)
+		return (NULL);
 	check_for_pipe(tok);
 	enumeration(tok);
 	check_for_cmd_red_args(&tok);

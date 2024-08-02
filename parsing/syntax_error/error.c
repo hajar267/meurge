@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 23:43:24 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/07/31 12:12:19 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/08/02 11:12:55 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ t_token_type	token_content_type(char *str)
 		if (ft_strncmp(str, "|", 1) == 0 && len == 1)
 			type = Pipe;
 		else if (ft_strncmp(str, "<", 1) == 0 && len == 1)
-			type = REDIRECT_OUT;
-		else if (ft_strncmp(str, ">", 1) == 0 && len == 1)
 			type = REDIRECT_IN;
+		else if (ft_strncmp(str, ">", 1) == 0 && len == 1)
+			type = REDIRECT_OUT;
 		else if (ft_strncmp(str, ">>", 2) == 0 && len == 2)
 			type = APPEND;
 		else if (ft_strncmp(str, "<<", 2) == 0 && len == 2)

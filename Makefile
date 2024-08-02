@@ -6,7 +6,7 @@
 #    By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 16:05:43 by hfiqar            #+#    #+#              #
-#    Updated: 2024/07/31 13:24:28 by hfiqar           ###   ########.fr        #
+#    Updated: 2024/08/02 11:12:30 by hfiqar           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,6 @@ SRC = parsing/tokenizer/characters.c \
 	parsing/tokenizer/tokenizer_utils.c \
 	parsing/tokenizer/tokenizer.c \
 	parsing/syntax_error/error.c \
-	parsing/syntax_error/enum.c \
 	parsing/syntax_error/cmd_args.c \
 	parsing/main.c \
 	parsing/expander/expander_utils.c \
@@ -28,6 +27,7 @@ SRC = parsing/tokenizer/characters.c \
 	parsing/expander/heredoc_expander_helper.c \
 	parsing/expander/heredoc_expander.c \
 	parsing/final_list/new_list.c \
+	parsing/final_list/enum.c \
 	parsing/final_list/open_files.c \
 	parsing/final_list/store_data.c \
 	utils/gab.c \

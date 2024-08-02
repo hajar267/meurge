@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: istili <istili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 22:48:19 by istili            #+#    #+#             */
-/*   Updated: 2024/08/02 21:21:34 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/08/02 21:36:08 by istili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,6 @@
 
 void	cho(t_cmds *commands, t_link *envp, int flag)
 {
-	// char	*line;
-	// char	**splitted;
-
-	// line = ft_strdup_del(readline("minishell$> "));
-	// splitted = ft_split(line, ' ');
-	// if (line == NULL)
-	// {
-	// 	write(1, "minishell$> exit\n", 18);
-	// 	ft_malloc_gab(0, 1);
-	// 	exit(exit_status(0, 0));
-	// }
 	if (!ft_strcmp(commands->data[0], "export"))
 		f_export(envp, commands->data, flag);
 	else if (!ft_strcmp(commands->data[0], "env"))

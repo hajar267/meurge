@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: istili <istili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 08:57:16 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/07/31 12:12:19 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/08/02 22:27:58 by istili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ char *herdoc_read(char *h_d, t_cmds *commands)
 		char *tmp = heredoc_expander(h_d);
 		h_d = ft_memset(h_d, 0, ft_strlen(h_d));
 		h_d = ft_strdup(tmp);
-		free(tmp);
 	}
 	return (h_d);
 }
@@ -79,7 +78,7 @@ char *open_herdoc_file(t_cmds *commands, char *file)
 
 void	heredoc(t_cmds	*commands)
 {
-	char *file;
+	char	*file;
 
 	file = NULL;
 	while(commands)

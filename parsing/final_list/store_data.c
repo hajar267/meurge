@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: istili <istili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 03:36:57 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/07/31 12:12:19 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/08/02 22:00:41 by istili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,8 @@ t_cmds	*new_node(int i)
 {
 	t_cmds	*node;
 
-	node = malloc(sizeof(t_cmds));
-	if (!node)
-		return (NULL);
-	node->data = malloc(sizeof(char *) * (i + 1));
-	if (!node->data)
-		return (NULL);
+	node = ft_malloc_gab(sizeof(t_cmds), 0);
+	node->data = ft_malloc_gab(sizeof(char *) * (i + 1), 0);
 	node->next = NULL;
 	node->prev = NULL;
 	return (node);
@@ -90,10 +86,7 @@ void	convert_to_new_list(t_token *token, t_cmds **cmnd)
 		store_data(cmnd, head);
 		i = 0;
 		while (head->data[i])
-		{
-			free(head->data[i]);
 			i++;
-		}
 		head = head->next;
 	}
 }

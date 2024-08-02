@@ -3,44 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: istili <istili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 02:22:19 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/08/02 21:27:46 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/08/02 22:30:03 by istili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int convert_it(char *line, t_token **head_ref)
+void f()
 {
-    t_token *token = ft_tokenizer(line);
+	system("leaks minicoper");
+}
+
+int	convert_it(char *line, t_token **head_ref)
+{
+    t_token	*token;
+    t_token	*current;
+    t_token	*last;
+	t_token	*tmp;
+
+	token = ft_tokenizer(line);
+	current = NULL;
 	if (token == NULL)
 		return (-1);
-    t_token *current = NULL;
-
     while (token)
     {
-        current = malloc(sizeof(t_token));
-		if (!current)
-			return (-1);
+        current = ft_malloc_gab(sizeof(t_token), 0);
         current->content = ft_strdup(token->content);
         current->next = NULL;
 		current->prev = NULL;
-
         if (*head_ref == NULL)
             *head_ref = current;
         else
         {
-            t_token *last = *head_ref;
+			last = *head_ref;
             while (last->next!= NULL)
                 last = last->next;
             last->next = current;
 			current->prev = last;
         }
-		t_token	*tmp = token->next;
-        free(token->content);
-        free(token);
+		tmp = token->next;
 		token = tmp;
     }
 	return (1);
@@ -59,15 +63,19 @@ int	check_for_empty(t_token	*tokens)
 
 t_cmds	*read_line(void)
 {
-	char* line = readline("my_bash-4.5$ ");
+	t_token	*tok;
+	t_cmds	*commands;
+	char	*line;
+	t_token *tmp;
+
+	line = readline("my_bash-4.5$ ");
+	tok = NULL;
+	commands = NULL;
 	if (!line)
-		return (NULL) ;
-	t_token *tok = NULL;
-	t_cmds	*commands =NULL;
+		return (NULL);
 	if (convert_it(line, &tok) == -1)
-		return (NULL) ;
+		return (NULL);
 	// we enum just into " " for $
-	free(line);
 	if (check_for_empty(tok) == -1)
 		return (NULL);
 	check_for_pipe(tok);
@@ -78,12 +86,22 @@ t_cmds	*read_line(void)
 	ft_open_files(commands);
 	while(tok)
 	{
-		t_token *tmp = tok->next;
-		free(tok->content);
-		free(tok);
+		tmp = tok->next;
 		tok = tmp;
 	}
 	return (commands);
+}
+
+int    ft_numb_pipe(t_cmds    *cmds)
+{
+    int i = 0;
+    while (cmds)
+    {
+        if (ft_strcmp(cmds->data[0], "|") == 0)
+            i++;
+        cmds = cmds->next;
+    }
+    return (i);
 }
 
 int main(int ac, char **av, char **env)
@@ -91,6 +109,7 @@ int main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	(void)env;
+	atexit(f);
 	t_link	*envp;
 	int flag;
 	flag = 0;
@@ -137,6 +156,8 @@ int main(int ac, char **av, char **env)
 		// 	commands = commands ->next;
 		// }
 	}
+	ft_malloc_gab(0, 1);
+	return 0;
 }
 
 /*

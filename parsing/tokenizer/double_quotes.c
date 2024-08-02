@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   double_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: istili <istili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 10:51:26 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/08/02 11:44:59 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/08/02 22:01:34 by istili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,13 @@ int	store_data_d_quote(t_token *var, t_token **token, char *line, int i)
 		if (line[i] == '$')
 			i = ft_d_quotes_expdr(i, &last, var, line);
 		else
-			last->content[var->j++] = line[i++];	
-			
+			last->content[var->j++] = line[i++];
 	}
 	last->content[var->j] = '\0';
 	if (!line[i])
 	{
 		write(2, "syntax error\n", 13);
-		return(-1);
+		return (-1);
 	}
 	i++;
 	if (check_after_d_quote(var, token, line, i) == -1)

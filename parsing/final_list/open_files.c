@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: istili <istili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 08:45:03 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/07/31 12:12:19 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/08/02 22:25:02 by istili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void ft_red_out(t_cmds *command)
 	if (command->fd == -1)
 	{
 		printf("failed to open\n");
+		ft_malloc_gab(0, 1);
 		exit(EXIT_FAILURE);
 	}
 	write(command->fd,"red\n",4);
@@ -30,6 +31,7 @@ void	ft_append(t_cmds *command)
 	if (command->fd == -1)
 	{
 		printf("failed to open\n");
+		ft_malloc_gab(0, 1);
 		exit(EXIT_FAILURE);
 	}
 	write(command->fd,"n >\n",4);
@@ -44,6 +46,7 @@ void ft_red_in(t_cmds *command)
 		if (command->fd == -1)
 		{
 			printf("failed to open\n");
+			ft_malloc_gab(0, 1);
 			exit(EXIT_FAILURE);
 		}
 		write(command->fd,"h",1);
@@ -52,6 +55,7 @@ void ft_red_in(t_cmds *command)
 	else
 	{
 		printf("NO such file or directory\n");
+		ft_malloc_gab(0, 1);
 		exit(EXIT_FAILURE);
 	}
 }

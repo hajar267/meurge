@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_expander.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: istili <istili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:12:41 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/08/02 12:16:03 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/08/02 21:58:12 by istili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*heredoc_expander(char *line)
 
 	i = 0;
 	x = 0;
-	data = malloc(ft_strlen(line));
+	data = ft_malloc_gab(ft_strlen(line), 0);
 	len = ft_strlen (line);
 	while (line[i])
 	{

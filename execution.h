@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: istili <istili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 23:27:12 by istili            #+#    #+#             */
-/*   Updated: 2024/07/31 13:19:32 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/08/02 21:39:35 by istili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,6 @@ typedef struct s_gab
 	struct s_gab	*next;
 	void			*ptr;
 }	t_gab;
-
-typedef struct s_val
-{
-	char	**cmd1;
-	char	**cmd2;
-}	t_val;
 
 typedef struct s_list
 {

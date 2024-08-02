@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: istili <istili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 01:15:02 by istili            #+#    #+#             */
-/*   Updated: 2024/08/02 21:19:32 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/08/02 22:23:55 by istili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	handle_siginit(int sig)
 	if (sig == SIGINT)
 	{
 		exit_status(1, 1);
+		ft_malloc_gab(0, 1);
 		write(1, "\n", 1);
 		rl_replace_line("", 0);
 		rl_on_new_line();

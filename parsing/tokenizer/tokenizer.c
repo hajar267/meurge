@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: istili <istili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 10:54:07 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/07/31 12:12:19 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/08/02 22:03:10 by istili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ char	*ft_strdup(const char *s)
 
 	i = 0;
 	len = ft_strlen(s);
-	str = malloc(len +1);
-	if (!str)
-		return (NULL);
+	str = ft_malloc_gab(len + 1, 0);
 	while (s[i])
 	{
 		str[i] = s[i];
@@ -36,12 +34,8 @@ t_token	*lst_new(t_token *var, int len)
 {
 	t_token	*node;
 
-	node = malloc(sizeof(t_token));
-	if (!node)
-		return (NULL);
-	node->content = malloc(len + 1);
-	if (!node->content)
-		return (NULL);
+	node = ft_malloc_gab(sizeof(t_token), 0);
+	node->content = ft_malloc_gab(len + 1, 0);
 	node->next = NULL;
 	node->prev = NULL;
 	var->j = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: istili <istili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 21:41:41 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/07/31 12:12:19 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/08/02 21:59:32 by istili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,8 @@ t_token	*ft_lst_new(int len)
 {
 	t_token	*command;
 
-	command = malloc(sizeof(t_token));
-	if (!command)
-		return (NULL);
-	command->data = malloc(sizeof(char *) * (len + 1));
-	if (!command->data)
-		return (NULL);
+	command = ft_malloc_gab(sizeof(t_token), 0);
+	command->data = ft_malloc_gab(sizeof(char *) * (len + 1), 0);
 	command->next = NULL;
 	command->prev = NULL;
 	return (command);

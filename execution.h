@@ -6,7 +6,7 @@
 /*   By: istili <istili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 23:27:12 by istili            #+#    #+#             */
-/*   Updated: 2024/08/02 21:39:35 by istili           ###   ########.fr       */
+/*   Updated: 2024/08/03 02:36:26 by istili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef struct s_list
 
 void	f_echo(char **av);
 void	f_pwd(t_link *linked);
-void	f_unset(t_link *linkd, char **av);
+int		f_unset(t_link *linkd, char **av);
 int		f_cd(char **path, t_link *envp);
 void	f_exit(char **av);
 void	f_export(t_link *linkedlist, char **av, int flag_env);
@@ -107,6 +107,8 @@ void	pipex(int f1, int f2, char **env, char **av);
 void	clean_path(char **env, char **command);
 void	handle_siginit(int sig);
 void	*ft_malloc_gab(size_t size, int flag);
+int		is_alpha_(char c);
+int		is_alphnum(char c);
 
 
 #endif

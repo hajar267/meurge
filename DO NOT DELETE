@@ -10,7 +10,7 @@ NO such file or directory
 
 my_bash-4.5$ export $a=$a
 my_bash-4.5$ exit
-it needs to prompt the error code -.-
+it needs to prompt the error code
 --> (bash: export: `=': not a valid identifier)
 
 export "" -> in my bash it exit in bash it prompt this error code
@@ -43,13 +43,6 @@ declare -x var="test"
 bash-3.2$ echo $var
 test
 (exit instead of exporting var)
-
-
--> bash-3.2$ .
-bash: .: filename argument required
-.: usage: . filename [arguments]
--> my_bash-4.5$ .
-minishell: .: command not found
 
 
 env -i ./minishell
@@ -192,13 +185,3 @@ unset "" test
 my_bash-4.5$ exit
 bash: unset: `': not a valid identifier
 
-
-unset =
-my_bash-4.5$ 
-bash: unset: `=': not a valid identifier
-echo $? should print 1
-
-
-/bin/echo something
-minishell: /bin/echo: command not found
-bash : bin

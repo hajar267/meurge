@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   export_helper.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: istili <istili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 23:35:57 by istili            #+#    #+#             */
-/*   Updated: 2024/07/31 12:52:46 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/08/03 02:28:30 by istili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int	is_alpha_(char c)
+int	is_alpha_(char c)
 {
 	if ((c >= 'a' && c <= 'z')
 		|| (c >= 'A' && c <= 'Z') || c == '_')
@@ -20,7 +20,7 @@ static int	is_alpha_(char c)
 	return (-1);
 }
 
-static int	is_alphnum(char c)
+int	is_alphnum(char c)
 {
 	if (is_alpha_(c) != -1 || (c >= '0' && c <= '9'))
 		return (0);

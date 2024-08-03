@@ -6,11 +6,20 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 12:41:35 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/08/02 11:21:14 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/08/03 20:55:05 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+int ft_check(t_token **last)
+{
+	if ((*last)->prev != NULL && \
+	ft_strcmp((*last)->prev->content, "<<") == 0 && \
+	ft_strlen((*last)->prev->content) == 2)
+		return (1);
+	return (-1);
+}
 
 int	ft_char_expdr(t_token **last, t_token *var, char *line, int i)
 {
@@ -18,8 +27,7 @@ int	ft_char_expdr(t_token **last, t_token *var, char *line, int i)
 	int		x;
 	char	*data;
 
-	if ((ft_strcmp((*last)->prev->content, "<<") == 0 && \
-	ft_strlen((*last)->prev->content) == 2) || line[i + 1] == '?')
+	if (ft_check(last) == 1)
 		(*last)->content[var->j++] = line[i++];
 	else
 	{

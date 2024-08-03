@@ -1,0 +1,14 @@
+DO NOT DELETE
+Makefile
+builtins
+environment
+execution
+execution.h
+hajar hajar
+k
+main_exec.c
+minishell
+minishell.h
+parsing
+test
+utils

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_helpers.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: istili <istili@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 23:26:36 by istili            #+#    #+#             */
-/*   Updated: 2024/08/02 23:28:25 by istili           ###   ########.fr       */
+/*   Updated: 2024/08/03 22:47:51 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,25 @@ char	*find_home_path(t_link *envp)
 	}
 	return (0);
 }
-// char	*find_val(t_link *envp, char *key)
-// {
-// 	t_node	*head;
-// 	t_env	*env;
 
-// 	head = envp->head;
-// 	while (head)
-// 	{
-// 		env = head->data;
-// 		if (!ft_strcmp(env->key, key))
-// 			return (env->val);
-// 		head = head->next;
-// 	}
-// 	return (0);
-// }
+char	*find_val(t_link *envp, char *key)
+{
+	t_link	*envp;
+	t_node	*head;
+	t_env	*env;
+
+	// envp = env_linkedlist(env);
+	head = envp->head;
+	while (head)
+	{
+		env = head->data;
+		if (!ft_strcmp(env->key, key))
+			return (env->val);
+		head = head->next;
+	}
+	return (NULL);
+}
+
 void	updatenv(t_link *link, char *key, char *val)
 {
 	t_node	*head;

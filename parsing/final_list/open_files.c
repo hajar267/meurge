@@ -3,42 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   open_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: istili <istili@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 08:45:03 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/08/02 22:25:02 by istili           ###   ########.fr       */
+/*   Updated: 2024/08/03 21:42:10 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void ft_red_out(t_cmds *command)
+int ft_red_out(t_cmds *command)
 {
 	command->fd = open(command->next->data[0], O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 	if (command->fd == -1)
 	{
 		printf("failed to open\n");
 		ft_malloc_gab(0, 1);
-		exit(EXIT_FAILURE);
+		return (-1);
 	}
 	write(command->fd,"red\n",4);
 	close (command->fd);
+	return (1);
 }
 
-void	ft_append(t_cmds *command)
+int	ft_append(t_cmds *command)
 {
 	command->fd = open(command->next->data[0], O_RDWR | O_CREAT | O_APPEND , S_IRUSR | S_IWUSR);
 	if (command->fd == -1)
 	{
 		printf("failed to open\n");
 		ft_malloc_gab(0, 1);
-		exit(EXIT_FAILURE);
+		return (-1);
 	}
 	write(command->fd,"n >\n",4);
 	close (command->fd);
+	return (1);
 }
 
-void ft_red_in(t_cmds *command)
+int ft_red_in(t_cmds *command)
 {
 	if (access(command->next->data[0], F_OK) == 0)
 	{
@@ -46,8 +48,7 @@ void ft_red_in(t_cmds *command)
 		if (command->fd == -1)
 		{
 			printf("failed to open\n");
-			ft_malloc_gab(0, 1);
-			exit(EXIT_FAILURE);
+			return (-1);
 		}
 		write(command->fd,"h",1);
 		close (command->fd);
@@ -55,21 +56,31 @@ void ft_red_in(t_cmds *command)
 	else
 	{
 		printf("NO such file or directory\n");
-		ft_malloc_gab(0, 1);
-		exit(EXIT_FAILURE);
+		return (-1);
 	}
+	return (1);
 }
 
-void	ft_open_files(t_cmds	*command)
+int	ft_open_files(t_cmds	*command)
 {
 	while(command)
 	{
 		if (ft_strcmp(command->data[0], ">") == 0)
-			ft_red_out(command);
+		{
+			if (ft_red_out(command) == -1)
+				return (-1);
+		}
 		else if (ft_strcmp(command->data[0], ">>") == 0)
-			ft_append(command);
+		{
+			if (ft_append(command) == -1)
+				return (-1);
+		}
 		else if (ft_strncmp(command->data[0], "<", 1) == 0)
-			ft_red_in(command);
+		{
+			if (ft_red_in(command) == -1)
+				return (-1);
+		}
 		command = command->next;
 	}
+	return (1);
 }

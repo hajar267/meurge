@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 10:54:25 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/08/02 12:09:04 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/08/03 22:42:54 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	check_for_cmd_red_args(t_token	**token);
 void	convert_to_new_list(t_token	*token, t_cmds	**cmnd);
 
 // void	check_for_red_args(t_token	**token);
-void	ft_open_files(t_cmds	*command);
+int	ft_open_files(t_cmds	*command);
 int convert_it(char *line, t_token **head_ref);
 t_token	*ft_tokenizer(char *line);
 int	ft_len_args(char **str);

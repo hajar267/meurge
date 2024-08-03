@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   double_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: istili <istili@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 10:51:26 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/08/02 22:01:34 by istili           ###   ########.fr       */
+/*   Updated: 2024/08/03 20:47:53 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	ft_d_quotes_expdr(int i, t_token **last, t_token *var, char *line)
 	int		x;
 	char	*data;
 
-	if ((ft_strcmp((*last)->prev->content, "<<") == 0 && \
-	ft_strlen((*last)->prev->content) == 2) || line[i + 1] == '?')
+	if ((*last)->prev != NULL && ft_strcmp((*last)->prev->content, "<<") == 0 && \
+	ft_strlen((*last)->prev->content) == 2)
 		(*last)->content[var->j++] = line[i++];
 	else
 	{

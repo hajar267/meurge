@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: istili <istili@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 02:22:19 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/08/03 00:01:59 by istili           ###   ########.fr       */
+/*   Updated: 2024/08/03 22:43:41 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,16 @@ int	convert_it(char *line, t_token **head_ref)
 	return (1);
 }
 
-int	check_for_empty(t_token	*tokens)
-{
-	while (tokens)
-	{
-		if (tokens->content[0] == '\0')
-			return (-1);
-		tokens = tokens->next;
-	}
-	return (1);
-}
+// int	check_for_empty(t_token	*tokens)
+// {
+// 	while (tokens)
+// 	{
+// 		if (tokens->content[0] == '\0')
+// 			return (-1);
+// 		tokens = tokens->next;
+// 	}
+// 	return (1);
+// }
 
 t_cmds	*read_line(void)
 {
@@ -69,6 +69,14 @@ t_cmds	*read_line(void)
 	t_token *tmp;
 
 	line = ft_strdup_del(readline("my_bash-4.5$ "));
+	if (!line)
+	{
+		write(1, "my_bash-4.5$ exit\n", 18);
+		ft_malloc_gab(0, 1);
+		exit(exit_status(0, 0));
+	}
+	else
+		add_history(line);
 	tok = NULL;
 	commands = NULL;
 	if (!line)
@@ -76,14 +84,15 @@ t_cmds	*read_line(void)
 	if (convert_it(line, &tok) == -1)
 		return (NULL);
 	// we enum just into " " for $
-	if (check_for_empty(tok) == -1)
-		return (NULL);
+	// if (check_for_empty(tok) == -1)
+	// 	return (NULL);
 	check_for_pipe(tok);
 	enumeration(tok);
 	check_for_cmd_red_args(&tok);
 	convert_to_new_list(tok, &commands);
 	heredoc(commands);
-	ft_open_files(commands);
+	if (ft_open_files(commands) == -1)
+		return (NULL);
 	while(tok)
 	{
 		tmp = tok->next;
@@ -130,39 +139,29 @@ int main(int ac, char **av, char **env)
 	// 	printf("%s : %s\n", env->key, env->val);
 	// 	tmp1 = tmp1->next;
 	// }
-	rl_catch_signals = 0;
-	signal(SIGINT, handle_siginit);
-	signal(SIGQUIT, SIG_IGN);
+	// rl_catch_signals = 0;
+	// signal(SIGINT, handle_siginit);
+	// signal(SIGQUIT, SIG_IGN);
 	while(true)
 	{
 		t_cmds *commands = read_line();
 		if (!commands)
-		{
-			write(1, "my_bash-4.5$ exit\n", 18);
-			ft_malloc_gab(0, 1);
-			exit(exit_status(0, 0));
-		}
+			continue;
 		cho(commands, envp, flag);
 		// while(commands)
 		// {
 		// 	int i = 0;
-		// 	printf("---------------------");
 		// 	while(commands->data[i])
 		// 	{
 		// 		printf("data : %s\n", commands->data[i]);
 		// 		i++;
 		// 	}
+		// 	printf("---------------------\n");
 		// 	printf("fd_redir: %d\nfd_heredoc: %d\n", commands->fd, commands->fd_h);
 		// 	printf("---------------------");
 		// 	printf("----\n");
-		// 	commands = commands ->next;
+			// commands = commands ->next;
 		// }
 	}
 	return 0;
 }
-
-/*
-	ther is a method to implimentate the << the we can call the readline another time 
-	in infinite loop and take her > to print it and then we save each line in a char ** or in a file 
-	and then we applicate the command before << to the file
-*/

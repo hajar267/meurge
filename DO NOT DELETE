@@ -1,0 +1,204 @@
+my_bash-4.5$ export test='$USER'
+my_bash-4.5$ echo $test
+my_bash-4.5$ exit
+
+
+my_bash-4.5$ < oujt
+NO such file or directory
+/* NB. Minishell exits whenever it encounters an input redirection. *\
+
+
+my_bash-4.5$ export $a=$a
+my_bash-4.5$ exit
+it needs to prompt the error code -.-
+--> (bash: export: `=': not a valid identifier)
+
+export "" -> in my bash it exit in bash it prompt this error code
+bash: export: `': not a valid identifier
+
+my_bash-4.5$ export "" a=1
+my_bash-4.5$ exit
+bash-3.2$ export "" a=1
+bash: export: `': not a valid identifier
+-------
+my_bash-4.5$ export $var=1
+my_bash-4.5$ exit
+bash-3.2$ export $var=1
+bash: export: `=1': not a valid identifier
+
+
+echo "" lazy
+-> my bash : exit
+bash-3.2$ echo "" l
+ l
+
+
+export var=te""st
+-> my bash:
+declare -x var=test
+my_bash-4.5$ echo $var
+my_bash-4.5$ exit
+-> bash:
+declare -x var="test"
+bash-3.2$ echo $var
+test
+(exit instead of exporting var)
+
+
+-> bash-3.2$ .
+bash: .: filename argument required
+.: usage: . filename [arguments]
+-> my_bash-4.5$ .
+minishell: .: command not found
+
+
+env -i ./minishell
+-> my_bash
+my_bash-4.5$ echo $SHLVL
+my_bash-4.5$ exit
+-> bash
+bash-3.2$ echo $SHLVL
+1
+
+
+my_bash-4.5$ ""
+-> my_bash-4.5$ exit
+-> bash: : command not found
+
+
+echo "\\ls"
+-> my_bash \\ls
+-> bash \ls
+
+echo "12\""
+my bash -> syntax error
+my_bash-4.5$ exit
+-> bash -> 12"
+---------
+echo \>
+my bash-> syntax error!
+my_bash-4.5$ exit
+-> bash -> >
+
+echo $USER$var\$USER$USER\$USERtest$USER
+-> my bash : istiliistiliistili
+-> bash $USER$USERtest
+
+
+my_bash-4.5$ $
+-> my bash : [1]    93176 segmentation fault  ./minishell
+-> bash: $: command not found
+
+
+echo "$tests" "Makefile"
+
+
+export "test=ici"=coco
+my_bash-4.5$ echo $test
+my_bash-4.5$ exit
+-> bash-3.2$
+bash-3.2$ echo $test
+ici=coco
+
+
+export var=" truc"
+my_bash-4.5$ echo $var
+my_bash-4.5$ exit
+bash-3.2$ echo $var
+truc
+
+'non-export' -> bla & lala & var
+my_bash-4.5$ echo $bla
+my_bash-4.5$ exit
+bash-3.2$ echo $bla
+'\n'
+-------
+my_bash-4.5$ echo $lala bonjour
+my_bash-4.5$ exit
+bash-3.2$ echo $lala bonjour
+bonjour
+-------
+my_bash-4.5$ export $var
+my_bash-4.5$ exit
+bash-3.2$ export $var
+prints out export
+
+
+export test=123\" 
+echo $test
+-> my_bash-4.5$ 
+syntax error
+-> bash-3.2$
+123"
+-------
+export test=123\\
+echo $test
+my_bash-4.5$ exit
+bash-3.2$
+123\
+-------
+export test=123\'
+syntax error
+my_bash-4.5$ exit
+bash-3.2$ echo $test
+123'
+
+
+export t="fo    bar"
+echo $t
+my_bash-4.5$ exit
+bash-3.2 :
+fo bar
+--------
+export test=" fo bar"
+echo ab$test
+my : ab
+bash : ab fo bar
+--------
+also echo "ab"$test & echo ab"$test" same thing
+--------
+export test=" fooo    bar"
+my_bash-4.5$ echo "$test"
+my_bash-4.5$ exit
+bash-3.2$ echo "$test"
+ fooo    bar
+--------
+echo ""$test""
+my_bash-4.5$ exit
+bash prints the val
+also """$test"""
+
+
+export loop='hello$loop'
+echo $loop
+my_bash-4.5$ exit
+bash prints : hello$loop
+
+
+
+pipe alone : |
+syntax error!
+my_bash-4.5$ exit
+bash: syntax error near unexpected token `|'
+
+
+unset PATH
+echo $PATH
+my bash : /Users/istili/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/istili/.brew/bin
+bash : '\n'
+
+
+unset "" test
+my_bash-4.5$ exit
+bash: unset: `': not a valid identifier
+
+
+unset =
+my_bash-4.5$ 
+bash: unset: `=': not a valid identifier
+echo $? should print 1
+
+
+/bin/echo something
+minishell: /bin/echo: command not found
+bash : bin

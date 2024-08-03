@@ -6,11 +6,11 @@
 #    By: istili <istili@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 16:05:43 by hfiqar            #+#    #+#              #
-#    Updated: 2024/08/02 22:11:07 by istili           ###   ########.fr        #
+#    Updated: 2024/08/02 23:26:05 by istili           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minicoper
+NAME = minishell
 
 SRC = parsing/tokenizer/characters.c \
 	parsing/tokenizer/spaces.c \
@@ -50,7 +50,7 @@ SRC = parsing/tokenizer/characters.c \
 	execution/helpers.c \
 	main_exec.c 
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -ggdb3
 
 LFLAGS = -L$(shell brew --prefix readline)/lib
 

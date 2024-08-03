@@ -6,7 +6,7 @@
 /*   By: istili <istili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 02:22:19 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/08/02 22:30:03 by istili           ###   ########.fr       */
+/*   Updated: 2024/08/03 00:01:59 by istili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void f()
 {
-	system("leaks minicoper");
+	system("leaks minishell");
 }
 
 int	convert_it(char *line, t_token **head_ref)
@@ -68,7 +68,7 @@ t_cmds	*read_line(void)
 	char	*line;
 	t_token *tmp;
 
-	line = readline("my_bash-4.5$ ");
+	line = ft_strdup_del(readline("my_bash-4.5$ "));
 	tok = NULL;
 	commands = NULL;
 	if (!line)
@@ -113,6 +113,8 @@ int main(int ac, char **av, char **env)
 	t_link	*envp;
 	int flag;
 	flag = 0;
+	if (!isatty(ttyslot()))
+		return (printf("tty required\n"), 0);
 	if (*env == NULL)
 	{
 		envp = make_my_own_env();
@@ -128,6 +130,9 @@ int main(int ac, char **av, char **env)
 	// 	printf("%s : %s\n", env->key, env->val);
 	// 	tmp1 = tmp1->next;
 	// }
+	rl_catch_signals = 0;
+	signal(SIGINT, handle_siginit);
+	signal(SIGQUIT, SIG_IGN);
 	while(true)
 	{
 		t_cmds *commands = read_line();
@@ -137,26 +142,22 @@ int main(int ac, char **av, char **env)
 			ft_malloc_gab(0, 1);
 			exit(exit_status(0, 0));
 		}
-		rl_catch_signals = 0;
-		if (isatty(STDIN_FILENO))
-		{
-			signal(SIGINT, handle_siginit);
-			signal(SIGQUIT, SIG_IGN);
-		}
 		cho(commands, envp, flag);
 		// while(commands)
 		// {
 		// 	int i = 0;
+		// 	printf("---------------------");
 		// 	while(commands->data[i])
 		// 	{
 		// 		printf("data : %s\n", commands->data[i]);
 		// 		i++;
 		// 	}
+		// 	printf("fd_redir: %d\nfd_heredoc: %d\n", commands->fd, commands->fd_h);
+		// 	printf("---------------------");
 		// 	printf("----\n");
 		// 	commands = commands ->next;
 		// }
 	}
-	ft_malloc_gab(0, 1);
 	return 0;
 }
 

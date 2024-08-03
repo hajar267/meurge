@@ -6,7 +6,7 @@
 /*   By: istili <istili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 23:26:36 by istili            #+#    #+#             */
-/*   Updated: 2024/08/02 22:13:30 by istili           ###   ########.fr       */
+/*   Updated: 2024/08/02 23:28:25 by istili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char	*ft_strdup_del(void	*dir)
 	size = ft_strlen(dir) + 1;
 	tmp = ft_malloc_gab(size, 0);
 	tmp = ft_memcpy(tmp, dir, size);
+	free(dir);
 	return (tmp);
 }
 

@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 12:41:35 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/08/07 10:45:02 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/08/07 17:37:35 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	char_expdr(t_token **last, t_token *var, char *line, int i, t_link *envp)
 	int		j;
 	int		x;
 	char	*data;
+	int		len;
 
 	if (ft_check(last) == 1)
 		(*last)->content[var->j++] = line[i++];
@@ -36,8 +37,8 @@ int	char_expdr(t_token **last, t_token *var, char *line, int i, t_link *envp)
 		while(line[i] && (is_alphnum(line[i])) == 0)
 			i++;
 		data = ft_replace(line, j, i - 1, envp);
-		(*last)->content = (char *)ft_realloc((*last)->content, \
-		var->j + ft_strlen(data) + 1 + var->len, var->j);
+		len = ft_strlen(data) + var->len + var->j + 3;
+		(*last)->content = (char *)ft_realloc((*last)->content, len, var->j);
 		if (!(*last)->content)
 			return (-1);
 		x = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: istili <istili@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 23:27:12 by istili            #+#    #+#             */
-/*   Updated: 2024/08/03 02:36:26 by istili           ###   ########.fr       */
+/*   Updated: 2024/08/07 19:29:11 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_link
 	t_node	*tail;
 	int		size;
 	char	*pwd;
+	int		state;
 }	t_link;
 
 typedef struct s_env

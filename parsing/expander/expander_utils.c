@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 01:18:26 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/08/07 18:00:25 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/08/07 18:17:14 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,31 @@ char	*ft_replace(char *line, int start, int end, t_link *envp)
 	char	*content;
 	char	*data;
 	int		i;
+	int		state;
+	char	*e_status;
 
-	i = 0;
+	i = -1;
+	state = 127;
+	e_status = ft_itoa(127);
 	len = end - start + 1;
 	content = ft_malloc_gab(len + 1, 0);
 	data = NULL;
-	while(start <= end)
-		content[i++] = line[start++];
-	content[i] = '\0';
-	data = find_val(envp, content);
+	if (line[start] == '?')
+	{
+		data = ft_malloc_gab(len + 4, 0);
+		while (e_status[++i])
+			data[i] = e_status[i];
+		start++;
+		while (start <= end)
+			data[i++] = line[start++];
+	}
+	else
+	{
+		while(start <= end)
+			content[++i] = line[start++];
+		content[i] = '\0';
+		data = find_val(envp, content);
+	}
 	if (!data)
 		return (ft_strdup(""));
 	return (data);

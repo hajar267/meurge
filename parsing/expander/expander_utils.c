@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 01:18:26 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/08/03 22:43:00 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/08/05 09:07:52 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	*ft_realloc(void *ptr, int new_size, int len)
     return (new_ptr);
 }
 
-char	*ft_replace(char *line, int start, int end)
+char	*ft_replace(char *line, int start, int end, t_link *envp)
 {
 	int		len;
 	char	*content;
@@ -39,7 +39,7 @@ char	*ft_replace(char *line, int start, int end)
 	while(start <= end)
 		content[i++] = line[start++];
 	content[i] = '\0';
-	data = getenv(content);
+	data = find_val(envp, content);
 	if (!data)
 		return (ft_strdup(""));
 	return (data);

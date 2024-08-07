@@ -185,3 +185,7 @@ unset "" test
 my_bash-4.5$ exit
 bash: unset: `': not a valid identifier
 
+bash-3.2$ echo $USER*-+/*+-*/$USER
+hfiqar*-+/*+-*/hfiqar
+my_bash-4.5$ echo $USER+-*/*-+$USER
+hfiqar  (is_alphnum from export_h file)

@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 08:45:03 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/08/03 21:42:10 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/08/07 13:07:27 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int ft_red_out(t_cmds *command)
 {
-	command->fd = open(command->next->data[0], O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+	command->fd = open(command->next->data[0], O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (command->fd == -1)
 	{
-		printf("failed to open\n");
-		ft_malloc_gab(0, 1);
+		perror("my_bash: ");
+		// ft_malloc_gab(0, 1);
 		return (-1);
 	}
 	write(command->fd,"red\n",4);
@@ -28,11 +28,11 @@ int ft_red_out(t_cmds *command)
 
 int	ft_append(t_cmds *command)
 {
-	command->fd = open(command->next->data[0], O_RDWR | O_CREAT | O_APPEND , S_IRUSR | S_IWUSR);
+	command->fd = open(command->next->data[0], O_RDWR | O_CREAT | O_APPEND, 0644);
 	if (command->fd == -1)
 	{
-		printf("failed to open\n");
-		ft_malloc_gab(0, 1);
+		perror("my_bash: ");
+		// ft_malloc_gab(0, 1);
 		return (-1);
 	}
 	write(command->fd,"n >\n",4);
@@ -42,22 +42,14 @@ int	ft_append(t_cmds *command)
 
 int ft_red_in(t_cmds *command)
 {
-	if (access(command->next->data[0], F_OK) == 0)
+	command->fd = open(command->next->data[0], 0644);
+	if (command->fd == -1)
 	{
-		command->fd = open(command->next->data[0], O_RDWR , S_IRUSR | S_IWUSR);
-		if (command->fd == -1)
-		{
-			printf("failed to open\n");
-			return (-1);
-		}
-		write(command->fd,"h",1);
-		close (command->fd);
-	}
-	else
-	{
-		printf("NO such file or directory\n");
+		perror("my_bash: ");
 		return (-1);
 	}
+	write(command->fd,"h",1);
+	close (command->fd);
 	return (1);
 }
 

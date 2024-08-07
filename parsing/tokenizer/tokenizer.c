@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: istili <istili@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 10:54:07 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/08/02 22:03:10 by istili           ###   ########.fr       */
+/*   Updated: 2024/08/05 09:40:48 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	to_next_node(t_token **token, t_token *data)
 	data->next = NULL;
 }
 
-t_token	*ft_tokenizer(char *line)
+t_token	*ft_tokenizer(char *line, t_link *envp)
 {
 	t_token	var;
 	t_token	*data;
@@ -79,7 +79,7 @@ t_token	*ft_tokenizer(char *line)
 	i = 0;
 	if (is_space(line[i]))
 	{
-		if (handle_white_space(&var, &token, line, i) == -1)
+		if (spaces(&var, &token, line, i, envp) == -1)
 			return (NULL);
 	}
 	else
@@ -88,22 +88,22 @@ t_token	*ft_tokenizer(char *line)
 		to_next_node(&token, data);
 		if (is_quote(line[i]) == 1)
 		{
-			if (store_data_s_quote(&var, &token, line, i) == -1)
+			if (s_quote(&var, &token, line, i, envp) == -1)
 				return (NULL);
 		}
 		else if (is_quote(line[i]) == 2)
 		{
-			if (store_data_d_quote(&var, &token, line, i) == -1)
+			if (d_quote(&var, &token, line, i, envp) == -1)
 				return (NULL);
 		}
 		else if (is_separator(line[i]))
 		{
-			if (store_data_separator(&var, &token, line, i) == -1)
+			if (separator(&var, &token, line, i, envp) == -1)
 				return (NULL);
 		}
 		else if (is_character(line[i]))
 		{
-			if (store_data_characters(&var, &token, line, i) == -1)
+			if (characters(&var, &token, line, i, envp) == -1)
 				return (NULL);
 		}
 	}

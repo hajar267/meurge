@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: istili <istili@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 21:41:41 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/08/02 21:59:32 by istili           ###   ########.fr       */
+/*   Updated: 2024/08/07 12:22:56 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,13 @@ int	ft_store_data(t_token **command, t_token *token, int j, int len)
 	t_token	*last;
 
 	tmp = NULL;
-	if (!token->prev || ft_red(token->content) || token->type == Pipe || \
-	ft_red(token->prev->content) || token->prev->type == Pipe)
+	if (!token->prev || ft_red(token) || token->type == Pipe || \
+	ft_red(token->prev) || token->prev->type == Pipe)
 	{
 		j = 0;
 		tmp = ft_lst_new(len);
 		to_next_node(command, tmp);
+		final_enum(token, command);
 	}
 	last = ft_lstlast(*command);
 	last->data[j] = ft_strdup(token->content);
@@ -82,8 +83,8 @@ t_token	*ft_new_list(t_token *token)
 	{
 		j = ft_store_data(&command, head, j, len);
 		if (head->next == NULL || head->next->type == Pipe || \
-		ft_red(head->next->content) || head->type == Pipe || \
-		ft_red(head->content))
+		ft_red(head->next) || head->type == Pipe || \
+		ft_red(head))
 		{
 			lst = ft_lstlast(command);
 			lst->data[j + 1] = NULL;

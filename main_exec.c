@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   main_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: istili <istili@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 22:48:19 by istili            #+#    #+#             */
-/*   Updated: 2024/08/02 21:36:08 by istili           ###   ########.fr       */
+/*   Updated: 2024/08/07 10:28:51 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// ft_white_spaces(char *str)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (str[i] && (str[i] == ' ' || str[i] == '\n'))
+// 		i++;
+// }
+
 
 void	cho(t_cmds *commands, t_link *envp, int flag)
 {

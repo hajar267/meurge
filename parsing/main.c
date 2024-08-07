@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 02:22:19 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/08/03 22:43:41 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/08/07 12:56:34 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ void f()
 	system("leaks minishell");
 }
 
-int	convert_it(char *line, t_token **head_ref)
+int	convert_it(char *line, t_token **head_ref, t_link *envp)
 {
     t_token	*token;
     t_token	*current;
     t_token	*last;
 	t_token	*tmp;
 
-	token = ft_tokenizer(line);
+	token = ft_tokenizer(line, envp);
 	current = NULL;
 	if (token == NULL)
 		return (-1);
@@ -61,7 +61,7 @@ int	convert_it(char *line, t_token **head_ref)
 // 	return (1);
 // }
 
-t_cmds	*read_line(void)
+t_cmds	*read_line(t_link *envp)
 {
 	t_token	*tok;
 	t_cmds	*commands;
@@ -75,22 +75,27 @@ t_cmds	*read_line(void)
 		ft_malloc_gab(0, 1);
 		exit(exit_status(0, 0));
 	}
-	else
-		add_history(line);
+	if (line[0] == '\0')
+		return (NULL);
+	add_history(line);
 	tok = NULL;
 	commands = NULL;
 	if (!line)
 		return (NULL);
-	if (convert_it(line, &tok) == -1)
+	if (convert_it(line, &tok, envp) == -1)
 		return (NULL);
-	// we enum just into " " for $
-	// if (check_for_empty(tok) == -1)
-	// 	return (NULL);
-	check_for_pipe(tok);
-	enumeration(tok);
+	if (enumeration(tok) == -1)
+		return (NULL);
+		// while(tok)
+		// {
+		// 	printf("tok : %s\n", tok->content);
+		// 	tok=tok->next;
+		// }
+	if (check_for_pipe(tok) == -1)
+		return (NULL);
 	check_for_cmd_red_args(&tok);
 	convert_to_new_list(tok, &commands);
-	heredoc(commands);
+	heredoc(commands, envp);
 	if (ft_open_files(commands) == -1)
 		return (NULL);
 	while(tok)
@@ -144,7 +149,7 @@ int main(int ac, char **av, char **env)
 	// signal(SIGQUIT, SIG_IGN);
 	while(true)
 	{
-		t_cmds *commands = read_line();
+		t_cmds *commands = read_line(envp);
 		if (!commands)
 			continue;
 		cho(commands, envp, flag);

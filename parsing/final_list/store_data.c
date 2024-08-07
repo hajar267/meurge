@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: istili <istili@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 03:36:57 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/08/02 22:00:41 by istili           ###   ########.fr       */
+/*   Updated: 2024/08/05 19:41:02 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	add_nod(t_cmds **token, t_cmds *data)
 	data->next = NULL;
 }
 
-t_cmds	*new_node(int i)
+t_cmds	*new_node(int i, t_token *head)
 {
 	t_cmds	*node;
 
@@ -44,6 +44,7 @@ t_cmds	*new_node(int i)
 	node->data = ft_malloc_gab(sizeof(char *) * (i + 1), 0);
 	node->next = NULL;
 	node->prev = NULL;
+	node->type = head->type;
 	return (node);
 }
 
@@ -67,26 +68,16 @@ void	convert_to_new_list(t_token *token, t_cmds **cmnd)
 	t_token	*command;
 	t_token	*head;
 	t_cmds	*tmp;
-	int		i;
 	int		len;
 
 	command = ft_new_list(token);
 	head = command;
 	while (head)
 	{
-		//if i want to open the fds directly in tokens -->
-		// if (head->type == REDIRECT_IN || head->type == REDIRECT_OUT)
-		// 	head = head->next->next;
-		// ft_open_files(head->prev);
-		if (!head)
-			break;
 		len = ft_len_args(head->data);
-		tmp = new_node(len);
+		tmp = new_node(len, head);
 		add_nod(cmnd, tmp);
 		store_data(cmnd, head);
-		i = 0;
-		while (head->data[i])
-			i++;
 		head = head->next;
 	}
 }
